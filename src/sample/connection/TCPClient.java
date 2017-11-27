@@ -5,13 +5,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class TCPClient {
     private static Socket socket;
     private static DataOutputStream outputStream;
     private static BufferedReader inputStream;
 
-    public static void establishConnection() {
+    public static void establishConnection() throws SocketException {
         try {
             socket = new Socket("localhost", 9876);
             outputStream = new DataOutputStream(socket.getOutputStream());
@@ -23,7 +24,7 @@ public class TCPClient {
 
     public static void sendMessage(String message) {
         try {
-            outputStream.writeBytes(message);
+            outputStream.write(message.getBytes());
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
         }

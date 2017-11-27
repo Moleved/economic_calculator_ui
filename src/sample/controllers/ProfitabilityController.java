@@ -12,12 +12,12 @@ public class ProfitabilityController extends ActionController {
     @Override
     public void get() {
         String message = "GET;Profitability;";
-        send(message);
+        exchange(message);
     }
 
     @Override
     public void post() {
         String message = "POST;Profitability;" + profit.toString();
-        send(message);
+        exchange(message);
     }
 }

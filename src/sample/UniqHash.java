@@ -23,6 +23,7 @@ public class UniqHash {
         } catch (IOException ex) {
             createFile();
             createHash();
+            hash = getUniqHash();
         }
 
         return hash;
@@ -49,16 +50,6 @@ public class UniqHash {
 
     private static byte[] generateHash() {
         String uniqString = new Date().getTime() + "";
-        byte[] messageBytes = uniqString.getBytes();
-        byte[] result = null;
-
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            result = messageDigest.digest(messageBytes);
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println(ex.getStackTrace());
-        }
-
-        return result;
+        return uniqString.getBytes();
     }
 }

@@ -12,12 +12,12 @@ public class AbsoluteLiquidityController extends ActionController {
     @Override
     public void get() {
         String message = "GET;AbsoluteLiquidity;";
-        send(message);
+        exchange(message);
     }
 
     @Override
     public void post() {
         String message = "POST;AbsoluteLiquidity;" + entity;
-        send(message);
+        exchange(message);
     }
 }

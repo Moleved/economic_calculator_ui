@@ -11,13 +11,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.connection.TCPClient;
 
+import java.net.SocketException;
 import java.util.ArrayList;
 
 public class Main extends Application {
     private ChoiceBox choiceBox;
     private GridPane grid = new GridPane();
     private boolean firstLaunch = true;
+
+    private final String[] TYPES = {"Абсолютная ликвидность", "Текущая ликвидность", "Прибыльность"};
+    private final String[] ANCHORS = {"absolute", "current", "profit"};
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -59,11 +64,10 @@ public class Main extends Application {
     }
 
     private void createChoiceBox() {
-        choiceBox = new ChoiceBox<>(FXCollections.observableArrayList("Абсолютная ликвидность",
-                "Текущая ликвидность", "Прибыльность"));
+        choiceBox = new ChoiceBox<>(FXCollections.observableArrayList(TYPES));
         choiceBox.getSelectionModel().selectFirst();
 
-        ArrayList<String> ents = fillList("absolute", "current", "profit");
+        ArrayList<String> ents = fillList(ANCHORS);
         choiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 new ChangeListener<Number>() {
                     @Override
@@ -81,6 +85,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        try {
+            TCPClient.establishConnection();
+            launch(args);
+        } catch (SocketException ex) {
+            System.out.println(ex.getStackTrace());
+        } finally {
+            TCPClient.closeSession();
+        }
     }
 }
