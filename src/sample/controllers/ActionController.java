@@ -6,7 +6,6 @@ import sample.connection.TCPClient;
 public abstract class ActionController {
     protected String exchange(String fullMessage) {
         String message = getApplicationHash() + ";" + fullMessage;
-        System.out.println(message);
         TCPClient.sendMessage(message);
         return TCPClient.getServerResponse();
     }
