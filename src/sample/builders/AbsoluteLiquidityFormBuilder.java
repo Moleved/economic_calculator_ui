@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
-    private String[] labelsContent = { "Short financial investments: ", "Funds: " };
+    private String[] labelsContent = { "Short financial investments: ", "Funds: ", "Short liabilities: " };
     private Collection<TextField> inputs;
 
     @Override
@@ -46,8 +46,9 @@ public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
                 ArrayList<TextField> al = (ArrayList<TextField>) inputs;
                 String shortFinancialInvestments = al.get(0).getText();
                 String funds = al.get(1).getText();
+                String shortLiabilities = al.get(2).getText();
 
-                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds);
+                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds, shortLiabilities);
                 new AbsoluteLiquidityController(profit).post();
             }
         });

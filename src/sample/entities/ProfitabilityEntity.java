@@ -11,6 +11,6 @@ public class ProfitabilityEntity {
 
     @Override
     public String toString() {
-        return "profitFromAllActivities:" + profitFromAllActivities + ";" + "totalProductSalesCosts:" + totalProductSalesCosts;
+        return "profitFromAllActivities:" + profitFromAllActivities + "," + "totalProductSalesCosts:" + totalProductSalesCosts;
     }
 }
