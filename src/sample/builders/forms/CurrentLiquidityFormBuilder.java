@@ -1,18 +1,18 @@
-package sample.builders;
+package sample.builders.forms;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import sample.controllers.ProfitabilityController;
-import sample.entities.ProfitabilityEntity;
+import sample.controllers.CurrentLiquidityController;
+import sample.entities.CurrentLiquidityEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ProfitabilityFormBuilder extends FormBuilderImpl {
-    private String[] labelsContent = {"Profit from all activities: ", "Total product sales costs: "};
+public class CurrentLiquidityFormBuilder extends FormBuilderImpl {
+    private String[] labelsContent = { "Revolving assets: ", "Short liabilities: " };
     private Collection<TextField> inputs;
 
     @Override
@@ -44,11 +44,11 @@ public class ProfitabilityFormBuilder extends FormBuilderImpl {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 ArrayList<TextField> al = (ArrayList<TextField>) inputs;
-                String allActivitiesProfit = al.get(0).getText();
-                String totalCosts = al.get(1).getText();
+                String revolvingAssets = al.get(0).getText();
+                String shortLiabilities = al.get(1).getText();
 
-                ProfitabilityEntity profit = new ProfitabilityEntity(allActivitiesProfit, totalCosts);
-                new ProfitabilityController(profit).post();
+                CurrentLiquidityEntity current = new CurrentLiquidityEntity(revolvingAssets, shortLiabilities);
+                new CurrentLiquidityController(current).post();
             }
         });
 

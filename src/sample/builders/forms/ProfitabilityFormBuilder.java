@@ -1,18 +1,18 @@
-package sample.builders;
+package sample.builders.forms;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import sample.controllers.AbsoluteLiquidityController;
-import sample.entities.AbsoluteLiquidityEntity;
+import sample.controllers.ProfitabilityController;
+import sample.entities.ProfitabilityEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
-    private String[] labelsContent = { "Short financial investments: ", "Funds: ", "Short liabilities: " };
+public class ProfitabilityFormBuilder extends FormBuilderImpl {
+    private String[] labelsContent = {"Profit from all activities: ", "Total product sales costs: "};
     private Collection<TextField> inputs;
 
     @Override
@@ -29,7 +29,7 @@ public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
     @Override
     protected Collection<TextField> makeInputs() {
         inputs = new ArrayList<>();
-        
+
         for (int i = 0; i < labelsContent.length; i++) {
             inputs.add(new TextField());
         }
@@ -44,12 +44,11 @@ public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 ArrayList<TextField> al = (ArrayList<TextField>) inputs;
-                String shortFinancialInvestments = al.get(0).getText();
-                String funds = al.get(1).getText();
-                String shortLiabilities = al.get(2).getText();
+                String allActivitiesProfit = al.get(0).getText();
+                String totalCosts = al.get(1).getText();
 
-                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds, shortLiabilities);
-                new AbsoluteLiquidityController(profit).post();
+                ProfitabilityEntity profit = new ProfitabilityEntity(allActivitiesProfit, totalCosts);
+                new ProfitabilityController(profit).post();
             }
         });
 

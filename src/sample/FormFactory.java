@@ -1,9 +1,9 @@
 package sample;
 
 import javafx.scene.layout.VBox;
-import sample.builders.AbsoluteLiquidityFormBuilder;
-import sample.builders.CurrentLiquidityFormBuilder;
-import sample.builders.ProfitabilityFormBuilder;
+import sample.builders.forms.AbsoluteLiquidityFormBuilder;
+import sample.builders.forms.CurrentLiquidityFormBuilder;
+import sample.builders.forms.ProfitabilityFormBuilder;
 
 public class FormFactory {
     public VBox createAbsoluteLiquidityForm() {

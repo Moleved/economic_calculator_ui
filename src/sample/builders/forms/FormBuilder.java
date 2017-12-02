@@ -1,4 +1,4 @@
-package sample.builders;
+package sample.builders.forms;
 
 import javafx.scene.layout.VBox;
 

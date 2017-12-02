@@ -1,18 +1,18 @@
-package sample.builders;
+package sample.builders.forms;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import sample.controllers.CurrentLiquidityController;
-import sample.entities.CurrentLiquidityEntity;
+import sample.controllers.AbsoluteLiquidityController;
+import sample.entities.AbsoluteLiquidityEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CurrentLiquidityFormBuilder extends FormBuilderImpl {
-    private String[] labelsContent = { "Revolving assets: ", "Short liabilities: " };
+public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
+    private String[] labelsContent = { "Short financial investments: ", "Funds: ", "Short liabilities: " };
     private Collection<TextField> inputs;
 
     @Override
@@ -29,7 +29,7 @@ public class CurrentLiquidityFormBuilder extends FormBuilderImpl {
     @Override
     protected Collection<TextField> makeInputs() {
         inputs = new ArrayList<>();
-
+        
         for (int i = 0; i < labelsContent.length; i++) {
             inputs.add(new TextField());
         }
@@ -44,11 +44,12 @@ public class CurrentLiquidityFormBuilder extends FormBuilderImpl {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 ArrayList<TextField> al = (ArrayList<TextField>) inputs;
-                String revolvingAssets = al.get(0).getText();
-                String shortLiabilities = al.get(1).getText();
+                String shortFinancialInvestments = al.get(0).getText();
+                String funds = al.get(1).getText();
+                String shortLiabilities = al.get(2).getText();
 
-                CurrentLiquidityEntity current = new CurrentLiquidityEntity(revolvingAssets, shortLiabilities);
-                new CurrentLiquidityController(current).post();
+                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds, shortLiabilities);
+                new AbsoluteLiquidityController(profit).post();
             }
         });
 
