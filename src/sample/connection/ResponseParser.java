@@ -45,7 +45,11 @@ public class ResponseParser {
         ArrayList<AbsoluteLiquidityEntity> list = new ArrayList<>();
 
         for (HashMap<String, String> hash : parseValues()) {
-            list.add(new AbsoluteLiquidityEntity(hash.get("shortFinancialInvestments"), hash.get("funds"), hash.get("shortLiabilities")));
+            AbsoluteLiquidityEntity liq = new AbsoluteLiquidityEntity(hash.get("shortFinancialInvestments"), hash.get("funds"), hash.get("shortLiabilities"));
+            liq.setDate(hash.get("date"));
+            liq.setResult(hash.get("result"));
+
+            list.add(liq);
         }
 
         return list;
@@ -55,7 +59,10 @@ public class ResponseParser {
         ArrayList<CurrentLiquidityEntity> list = new ArrayList<>();
 
         for (HashMap<String, String> hash : parseValues()) {
-            list.add(new CurrentLiquidityEntity(hash.get("revolvingAssets"), hash.get("shortLiabilities")));
+            CurrentLiquidityEntity liq = new CurrentLiquidityEntity(hash.get("revolvingAssets"), hash.get("shortLiabilities"));
+            liq.setDate(hash.get("date"));
+            liq.setResult(hash.get("result"));
+            list.add(liq);
         }
 
         return list;
@@ -65,7 +72,12 @@ public class ResponseParser {
         ArrayList<ProfitabilityEntity> list = new ArrayList<>();
 
         for (HashMap<String, String> hash : parseValues()) {
-            list.add(new ProfitabilityEntity(hash.get("profitFromAllActivities"), hash.get("totalProductSalesCosts")));
+            ProfitabilityEntity prof = new ProfitabilityEntity(hash.get("profitFromAllActivities"), hash.get("totalProductSalesCosts"));
+            prof.setDate(hash.get("date"));
+            prof.setResult(hash.get("result"));
+            list.add(prof);
+
+            list.add(prof);
         }
 
         return list;

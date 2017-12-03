@@ -48,7 +48,7 @@ public class AbsoluteLiquidityFormBuilder extends FormBuilderImpl {
                 String funds = al.get(1).getText();
                 String shortLiabilities = al.get(2).getText();
 
-                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds, shortLiabilities);
+                AbsoluteLiquidityEntity profit = new AbsoluteLiquidityEntity(shortFinancialInvestments, funds, shortLiabilities, "");
                 new AbsoluteLiquidityController(profit).post();
             }
         });

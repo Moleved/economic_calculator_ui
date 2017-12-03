@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.builders.statistic.StatisticViewBuilder;
 import sample.connection.TCPClient;
 
 import java.net.SocketException;
@@ -27,7 +28,8 @@ public class Main extends Application {
     private ChoiceBox choiceBox;
     private GridPane grid = new GridPane();
     private boolean firstLaunch = true;
-    VBox box = new VBox();
+    private String dropdownChoice = "absolute";
+    private VBox box = new VBox();
 
     private final String[] TYPES = {"Абсолютная ликвидность", "Текущая ликвидность", "Прибыльность"};
     private final String[] ANCHORS = {"absolute", "current", "profit"};
@@ -44,7 +46,8 @@ public class Main extends Application {
         grid.add(choiceBox, 1,1 , 2, 1);
 
         addStatisticButton(primaryStage);
-        addForm("");
+        addForm();
+
 
 
         Scene scene = new Scene(grid, 800, 360);
@@ -63,83 +66,25 @@ public class Main extends Application {
 
                 Stage stage = new Stage();
 
-                addChart(stage);
-//                addTable(stage);
-
                 stage.setTitle("Statistics");
                 stage.initOwner(parentStage);
                 stage.initModality(Modality.APPLICATION_MODAL);
+
+                VBox vbox = new StatisticViewBuilder(dropdownChoice).build();
+
+                Scene scene = new Scene(vbox, 800, 600);
+
+                stage.setScene(scene);
                 stage.showAndWait();
             }
         });
     }
 
-    private void addChart(Stage stage) {
-        //defining the axes
-        final NumberAxis xAxis = new NumberAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Number of Month");
-        //creating the chart
-        final LineChart<Number,Number> lineChart =
-                new LineChart<Number,Number>(xAxis,yAxis);
-
-        lineChart.setTitle("Stock Monitoring, 2010");
-        //defining a series
-        XYChart.Series series = new XYChart.Series();
-        series.setName("My portfolio");
-        //populating the series with data
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
-
-        Scene scene  = new Scene(lineChart,800,600);
-        lineChart.getData().add(series);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void addTable(Stage stage) {
-        TableView table = new TableView();
-
-        Scene scene = new Scene(new Group());
-
-        final Label label = new Label("Address Book");
-        label.setFont(new Font("Arial", 20));
-
-        table.setEditable(true);
-
-        TableColumn firstNameCol = new TableColumn("First Name");
-        TableColumn lastNameCol = new TableColumn("Last Name");
-        TableColumn emailCol = new TableColumn("Email");
-
-        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
-
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
-
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void addForm(String formName) {
+    private void addForm() {
         FormFactory factory = new FormFactory();
         if (!firstLaunch) grid.getChildren().remove(this.box);
 
-        switch (formName) {
+        switch (dropdownChoice) {
             case "absolute": box = factory.createAbsoluteLiquidityForm();
                 break;
             case "current":  box = factory.createCurrentLiquidityForm();
@@ -161,7 +106,7 @@ public class Main extends Application {
                 new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        addForm(ents.get(newValue.intValue()));
+                        dropdownChoice = ents.get(newValue.intValue());
                     }
                 }
         );

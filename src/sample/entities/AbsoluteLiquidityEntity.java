@@ -1,6 +1,6 @@
 package sample.entities;
 
-public class AbsoluteLiquidityEntity {
+public class AbsoluteLiquidityEntity extends Entity {
     private String shortFinancialInvestments;
     private String funds;
     private String shortLiabilities;
@@ -9,6 +9,18 @@ public class AbsoluteLiquidityEntity {
         this.shortFinancialInvestments = shortFinancialInvestments;
         this.funds = funds;
         this.shortLiabilities = shortLiabilities;
+    }
+
+    public String getShortFinancialInvestments() {
+        return shortFinancialInvestments;
+    }
+
+    public String getFunds() {
+        return funds;
+    }
+
+    public String getShortLiabilities() {
+        return shortLiabilities;
     }
 
     @Override
