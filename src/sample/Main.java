@@ -13,6 +13,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -70,11 +71,11 @@ public class Main extends Application {
                 stage.initOwner(parentStage);
                 stage.initModality(Modality.APPLICATION_MODAL);
 
-                VBox vbox = new StatisticViewBuilder(dropdownChoice).build();
+//                VBox vbox = new StatisticViewBuilder(dropdownChoice).build();
 
-                Scene scene = new Scene(vbox, 800, 600);
+//                Scene scene = new Scene(vbox, 800, 600);
 
-                stage.setScene(scene);
+//                stage.setScene(scene);
                 stage.showAndWait();
             }
         });

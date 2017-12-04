@@ -1,11 +1,11 @@
 package sample;
 
-import sample.entities.Entity;
+import sample.entities.EntityImpl;
 
 import java.util.HashMap;
 
 public class StatisticFlyweight {
-    private HashMap<String, Entity> views = new HashMap<>();
+    private HashMap<String, EntityImpl> views = new HashMap<>();
 
     public StatisticFlyweight(String indexName) {
         defineViews();
