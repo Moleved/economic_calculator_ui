@@ -1,6 +1,6 @@
 package sample.entities;
 
-public class ProfitabilityEntity extends Entity {
+public class ProfitabilityEntity extends EntityImpl {
     private String profitFromAllActivities;
     private String totalProductSalesCosts;
 

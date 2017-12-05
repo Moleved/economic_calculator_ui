@@ -1,10 +1,13 @@
 package sample.builders.statistic;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import sample.entities.CurrentLiquidityEntity;
 
@@ -44,5 +47,17 @@ public class CurrentViewBuilder extends StatisticViewBuilder {
         vbox.getChildren().addAll(label, table);
 
         box.getChildren().add(vbox);
+    }
+
+    private void addToPdfButton(VBox box) {
+        Button button = new Button("To PDF");
+        box.getChildren().add(button);
+
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
     }
 }
