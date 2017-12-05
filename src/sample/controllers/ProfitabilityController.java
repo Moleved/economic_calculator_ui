@@ -10,9 +10,9 @@ public class ProfitabilityController extends ActionController {
     }
 
     @Override
-    public void get() {
+    public String get() {
         String message = "GET;Profitability;";
-        exchange(message);
+        return exchange(message);
     }
 
     @Override

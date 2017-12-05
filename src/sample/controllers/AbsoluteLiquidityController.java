@@ -10,9 +10,9 @@ public class AbsoluteLiquidityController extends ActionController {
     }
 
     @Override
-    public void get() {
+    public String get() {
         String message = "GET;AbsoluteLiquidity;";
-        exchange(message);
+        return exchange(message);
     }
 
     @Override

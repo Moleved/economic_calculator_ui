@@ -1,9 +1,5 @@
 package sample.connection;
 
-import sample.entities.AbsoluteLiquidityEntity;
-import sample.entities.CurrentLiquidityEntity;
-import sample.entities.ProfitabilityEntity;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,62 +24,14 @@ public class ResponseParser {
 
             this.object = array[0];
             this.values = array[1];
-
-            handleValues();
         }
     }
 
-    private void handleValues() {
-        ArrayList<?> handledValues;
-
-        if (object == "AbsoluteLiquidityEntity") handledValues = handleAbsoluteLiquidity();
-        else if (object == "CurrentLiquidityEntity") handledValues = handleCurrentLiquidityEntity();
-        else if (object == "ProfitabilityEntity") handledValues = handleProfitabilityEntity();
+    public String getObject() {
+        return object;
     }
 
-    private ArrayList<AbsoluteLiquidityEntity> handleAbsoluteLiquidity() {
-        ArrayList<AbsoluteLiquidityEntity> list = new ArrayList<>();
-
-        for (HashMap<String, String> hash : parseValues()) {
-            AbsoluteLiquidityEntity liq = new AbsoluteLiquidityEntity(hash.get("shortFinancialInvestments"), hash.get("funds"), hash.get("shortLiabilities"));
-            liq.setDate(hash.get("date"));
-            liq.setResult(hash.get("result"));
-
-            list.add(liq);
-        }
-
-        return list;
-    }
-
-    private ArrayList<CurrentLiquidityEntity> handleCurrentLiquidityEntity() {
-        ArrayList<CurrentLiquidityEntity> list = new ArrayList<>();
-
-        for (HashMap<String, String> hash : parseValues()) {
-            CurrentLiquidityEntity liq = new CurrentLiquidityEntity(hash.get("revolvingAssets"), hash.get("shortLiabilities"));
-            liq.setDate(hash.get("date"));
-            liq.setResult(hash.get("result"));
-            list.add(liq);
-        }
-
-        return list;
-    }
-
-    private ArrayList<ProfitabilityEntity> handleProfitabilityEntity() {
-        ArrayList<ProfitabilityEntity> list = new ArrayList<>();
-
-        for (HashMap<String, String> hash : parseValues()) {
-            ProfitabilityEntity prof = new ProfitabilityEntity(hash.get("profitFromAllActivities"), hash.get("totalProductSalesCosts"));
-            prof.setDate(hash.get("date"));
-            prof.setResult(hash.get("result"));
-            list.add(prof);
-
-            list.add(prof);
-        }
-
-        return list;
-    }
-
-    private ArrayList<HashMap<String, String>> parseValues() {
+    public ArrayList<HashMap<String, String>> parseValues() {
         String[] valuesForEachClass = values.split(";");
         ArrayList<HashMap<String, String>> hashesList = new ArrayList<>();
 

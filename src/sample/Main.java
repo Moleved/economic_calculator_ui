@@ -70,7 +70,7 @@ public class Main extends Application {
                 stage.initOwner(parentStage);
                 stage.initModality(Modality.APPLICATION_MODAL);
 
-                VBox vbox = new StatisticViewBuilder(dropdownChoice).build();
+                VBox vbox = new StatisticFacade(dropdownChoice).perform();
 
                 Scene scene = new Scene(vbox, 800, 600);
 

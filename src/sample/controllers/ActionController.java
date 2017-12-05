@@ -14,6 +14,6 @@ public abstract class ActionController {
         return UniqHash.getUniqHash();
     }
 
-    public abstract void get();
+    public abstract String get();
     public abstract void post();
 }
