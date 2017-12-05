@@ -56,7 +56,7 @@ public class CurrentViewBuilder extends StatisticViewBuilder {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                new PDFBuilder(indexName, entities).perform();
             }
         });
     }

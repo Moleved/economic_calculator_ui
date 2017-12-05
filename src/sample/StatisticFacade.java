@@ -51,8 +51,7 @@ public class StatisticFacade {
     }
 
     private String getResponse() {
-//        return controllers.get("indexName").get();
-        return "Some;Data";
+        return controllers.get("indexName").get();
     }
 
     private ResponseParser parseResponse(String message) {

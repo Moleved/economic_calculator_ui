@@ -55,7 +55,7 @@ public class AbsoluteViewBuilder extends StatisticViewBuilder {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                new PDFBuilder();
+                new PDFBuilder(indexName, entities).perform();
             }
         });
     }
