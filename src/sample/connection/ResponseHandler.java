@@ -51,8 +51,6 @@ public class ResponseHandler {
             prof.setDate(hash.get("date"));
             prof.setResult(hash.get("result"));
             list.add(prof);
-
-            list.add(prof);
         }
 
         return list;

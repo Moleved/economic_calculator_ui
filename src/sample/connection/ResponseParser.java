@@ -36,12 +36,12 @@ public class ResponseParser {
         ArrayList<HashMap<String, String>> hashesList = new ArrayList<>();
 
         for (String elem : valuesForEachClass) {
+            if (elem.equals("break")) break;
 
             HashMap<String, String> hash = new HashMap<>();
             String[] array = elem.split(",");
 
             for (String el : array) {
-                if (el == "break") break;
                 String[] pair =  el.split(":");
                 hash.put(pair[0], pair[1]);
             }

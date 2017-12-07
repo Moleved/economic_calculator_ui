@@ -12,8 +12,6 @@ import javafx.scene.layout.VBox;
 import sample.entities.ProfitabilityEntity;
 
 public class ProfitViewBuilder extends StatisticViewBuilder {
-    private ProfitabilityEntity[] entities;
-
     public ProfitViewBuilder(String indexName, ProfitabilityEntity[] entities) {
         super(indexName);
         this.entities = entities;
@@ -27,7 +25,8 @@ public class ProfitViewBuilder extends StatisticViewBuilder {
 
         final Label label = new Label(economicParameters.get(indexName));
 
-        table.getItems().addAll(entities);
+        ProfitabilityEntity[] ents = (ProfitabilityEntity[]) entities;
+        table.getItems().addAll(ents);
         for (String name : tableColumns.get(indexName)) {
             TableColumn<ProfitabilityEntity, String> col = new TableColumn<>(name);
             col.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDate()));

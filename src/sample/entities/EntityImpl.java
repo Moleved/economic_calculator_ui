@@ -16,6 +16,10 @@ public class EntityImpl implements Entity {
         return result;
     }
 
+    public Double getResultDoub() {
+        return Double.parseDouble(result);
+    }
+
     public void setResult(String result) {
         this.result = result;
     }

@@ -39,6 +39,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Economic calculator");
 
+        primaryStage.setOnCloseRequest(event -> {
+            TCPClient.sendMessage("close");
+        });
+
         createChoiceBox();
 
         grid.setVgap(10);
@@ -48,8 +52,6 @@ public class Main extends Application {
 
         addStatisticButton(primaryStage);
         addForm();
-
-
 
         Scene scene = new Scene(grid, 800, 360);
         primaryStage.setScene(scene);
@@ -108,6 +110,7 @@ public class Main extends Application {
                     @Override
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         dropdownChoice = ents.get(newValue.intValue());
+                        addForm();
                     }
                 }
         );
@@ -121,10 +124,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try {
-            TCPClient.establishConnection();
             launch(args);
-        } catch (SocketException ex) {
-            System.out.println(ex.getStackTrace());
         } finally {
             TCPClient.closeSession();
         }

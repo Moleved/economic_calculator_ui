@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import sample.entities.CurrentLiquidityEntity;
 
 public class CurrentViewBuilder extends StatisticViewBuilder {
-    private CurrentLiquidityEntity[] entities;
 
     public CurrentViewBuilder(String indexName, CurrentLiquidityEntity[] entities) {
         super(indexName);
@@ -28,7 +27,8 @@ public class CurrentViewBuilder extends StatisticViewBuilder {
 
         final Label label = new Label(economicParameters.get(indexName));
 
-        table.getItems().addAll(entities);
+        CurrentLiquidityEntity[] ents = (CurrentLiquidityEntity[]) entities;
+        table.getItems().addAll(ents);
 
         for (String name : tableColumns.get(indexName)) {
             TableColumn<CurrentLiquidityEntity, String> col = new TableColumn<>(name);

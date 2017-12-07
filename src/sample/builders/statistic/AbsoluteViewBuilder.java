@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import sample.entities.AbsoluteLiquidityEntity;
 
 public class AbsoluteViewBuilder extends StatisticViewBuilder {
-    private AbsoluteLiquidityEntity[] entities;
 
     public AbsoluteViewBuilder(String indexName, AbsoluteLiquidityEntity[] entities) {
         super(indexName);
@@ -27,7 +26,8 @@ public class AbsoluteViewBuilder extends StatisticViewBuilder {
 
         final Label label = new Label(economicParameters.get(indexName));
 
-        table.getItems().addAll(entities);
+        AbsoluteLiquidityEntity[] ents = (AbsoluteLiquidityEntity[]) entities;
+        table.getItems().addAll(ents);
         for (String name : tableColumns.get(indexName)) {
             TableColumn<AbsoluteLiquidityEntity, String> col = new TableColumn<>(name);
 

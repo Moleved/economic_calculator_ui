@@ -36,22 +36,24 @@ public class StatisticFacade {
     public VBox perform() {
         if (indexName == "absolute") {
             ArrayList<AbsoluteLiquidityEntity> list = handleResponse(parseResponse(getResponse())).handleAbsoluteLiquidity();
-            AbsoluteViewBuilder view = new AbsoluteViewBuilder(indexName, (AbsoluteLiquidityEntity[]) list.toArray());
+            AbsoluteLiquidityEntity[] entities = new AbsoluteLiquidityEntity[list.size()];
+            entities = list.toArray(entities);
+            AbsoluteViewBuilder view = new AbsoluteViewBuilder(indexName, entities);
             return view.build();
         } else if (indexName == "current") {
             ArrayList<CurrentLiquidityEntity> list = handleResponse(parseResponse(getResponse())).handleCurrentLiquidityEntity();
-            CurrentViewBuilder view = new CurrentViewBuilder(indexName, (CurrentLiquidityEntity[]) list.toArray());
+            CurrentViewBuilder view = new CurrentViewBuilder(indexName, list.toArray(new CurrentLiquidityEntity[list.size()]));
             return view.build();
         } else if (indexName == "profit") {
             ArrayList<ProfitabilityEntity> list = handleResponse(parseResponse(getResponse())).handleProfitabilityEntity();
-            ProfitViewBuilder view = new ProfitViewBuilder(indexName, (ProfitabilityEntity[]) list.toArray());
+            ProfitViewBuilder view = new ProfitViewBuilder(indexName, list.toArray(new ProfitabilityEntity[list.size()]));
             return view.build();
         }
         return new VBox();
     }
 
     private String getResponse() {
-        return controllers.get("indexName").get();
+        return controllers.get(indexName).get();
     }
 
     private ResponseParser parseResponse(String message) {
