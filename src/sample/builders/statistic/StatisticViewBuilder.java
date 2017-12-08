@@ -1,9 +1,12 @@
 package sample.builders.statistic;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import sample.entities.EntityImpl;
 
@@ -34,8 +37,21 @@ public abstract class StatisticViewBuilder {
     public VBox build() {
         addChart();
         addTable();
+        addFileButton();
 
         return box;
+    }
+
+    private void addFileButton() {
+        Button button = new Button("To File");
+
+        box.getChildren().add(button);
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                new PDFBuilder(indexName, entities).perform();
+            }
+        });
     }
 
     private void addChart() {

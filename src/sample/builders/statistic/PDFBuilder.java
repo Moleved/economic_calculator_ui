@@ -12,11 +12,20 @@ import sample.entities.ProfitabilityEntity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 
 public class PDFBuilder {
     private Entity[] list;
     private String type;
-    private final String DEST = "test_example.pdf";
+    private final String DEST = "statistic.pdf";
+
+    private static final HashMap<String, String[]> headers = new HashMap<>();
+
+    static {
+        headers.put("absolute", new String[] { "Funds", "Short financial investments", "Short liabilities", "Result", "Date" });
+        headers.put("current", new String[] { "Revolving assets", "Short liabilities", "Result", "Date" });
+        headers.put("profit", new String[] { "Profit from all activities", "Total product sales costs", "Result", "Date" });
+    }
 
     public PDFBuilder(String type, Entity[] list) {
         this.type = type;
@@ -25,7 +34,6 @@ public class PDFBuilder {
 
     public void perform() {
         File file = new File(DEST);
-//        file.getParentFile().mkdirs();
 
         if (type == "absolute") handleAbsolute(list);
         if (type == "current") handleCurrent(list);
@@ -38,6 +46,8 @@ public class PDFBuilder {
             PdfWriter.getInstance(document, new FileOutputStream(DEST));
             document.open();
             PdfPTable table = new PdfPTable(5);
+
+            addHeaders(table);
 
             for (Entity elem : list) {
                 AbsoluteLiquidityEntity entity = (AbsoluteLiquidityEntity) elem;
@@ -65,6 +75,8 @@ public class PDFBuilder {
             document.open();
             PdfPTable table = new PdfPTable(4);
 
+            addHeaders(table);
+
             for (Entity elem : list) {
                 CurrentLiquidityEntity entity = (CurrentLiquidityEntity) elem;
 
@@ -91,6 +103,8 @@ public class PDFBuilder {
             document.open();
             PdfPTable table = new PdfPTable(4);
 
+            addHeaders(table);
+
             for (Entity elem : list) {
                 ProfitabilityEntity entity = (ProfitabilityEntity) elem;
 
@@ -107,6 +121,12 @@ public class PDFBuilder {
             System.out.println(ex.getStackTrace());
         } catch (DocumentException ex) {
             System.out.println(ex.getStackTrace());
+        }
+    }
+
+    private void addHeaders(PdfPTable table) {
+        for (String header : headers.get(type)) {
+            table.addCell(header);
         }
     }
 }
