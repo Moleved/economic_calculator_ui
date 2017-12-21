@@ -1,5 +1,7 @@
 package sample.connection;
 
+import javafx.scene.control.Alert;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -37,6 +39,20 @@ public class TCPClient {
         String response = null;
         try {
             response = inputStream.readLine();
+
+            if (response.equals("404")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка на сервере");
+                alert.setHeaderText("Ошибка!");
+                alert.setContentText("Ошибка на сервере");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Запрос обработан успешно");
+                alert.setHeaderText("Данные обработаны");
+                alert.setContentText("Запрос обработан успешно");
+                alert.showAndWait();
+            }
 
             System.out.println("RESPONSE: " + response);
         } catch (IOException ex) {

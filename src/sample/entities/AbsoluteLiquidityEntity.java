@@ -1,6 +1,6 @@
 package sample.entities;
 
-public class AbsoluteLiquidityEntity extends EntityImpl implements Entity {
+public class AbsoluteLiquidityEntity extends EntityImpl {
     private String shortFinancialInvestments;
     private String funds;
     private String shortLiabilities;

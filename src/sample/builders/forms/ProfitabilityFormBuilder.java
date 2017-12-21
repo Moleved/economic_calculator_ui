@@ -47,8 +47,13 @@ public class ProfitabilityFormBuilder extends FormBuilderImpl {
                 String allActivitiesProfit = al.get(0).getText();
                 String totalCosts = al.get(1).getText();
 
-                ProfitabilityEntity profit = new ProfitabilityEntity(allActivitiesProfit, totalCosts);
-                new ProfitabilityController(profit).post();
+                if (matcher(allActivitiesProfit) && matcher(allActivitiesProfit)) {
+                    ProfitabilityEntity profit = new ProfitabilityEntity(allActivitiesProfit, totalCosts);
+                    new ProfitabilityController(profit).post();
+                } else {
+                    addWarningAlert();
+                    validate();
+                }
             }
         });
 

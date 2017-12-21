@@ -47,8 +47,13 @@ public class CurrentLiquidityFormBuilder extends FormBuilderImpl {
                 String revolvingAssets = al.get(0).getText();
                 String shortLiabilities = al.get(1).getText();
 
-                CurrentLiquidityEntity current = new CurrentLiquidityEntity(revolvingAssets, shortLiabilities);
-                new CurrentLiquidityController(current).post();
+                if (matcher(revolvingAssets) && matcher(shortLiabilities)) {
+                    CurrentLiquidityEntity current = new CurrentLiquidityEntity(revolvingAssets, shortLiabilities);
+                    new CurrentLiquidityController(current).post();
+                } else {
+                    addWarningAlert();
+                    validate();
+                }
             }
         });
 

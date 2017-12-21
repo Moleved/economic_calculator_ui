@@ -22,9 +22,25 @@ public class PDFBuilder {
     private static final HashMap<String, String[]> headers = new HashMap<>();
 
     static {
-        headers.put("absolute", new String[] { "Funds", "Short financial investments", "Short liabilities", "Result", "Date" });
-        headers.put("current", new String[] { "Revolving assets", "Short liabilities", "Result", "Date" });
-        headers.put("profit", new String[] { "Profit from all activities", "Total product sales costs", "Result", "Date" });
+        headers.put("absolute", new String[] {
+                "Фонды",
+                "Краткосрочные финансовые инвестиции",
+                "Краткосрочные обязательства",
+                "Результат",
+                "Дата"
+        });
+        headers.put("current", new String[] {
+                "Оборотные активы",
+                "Краткосрочные обязательства",
+                "Результат",
+                "Дата"
+        });
+        headers.put("profit", new String[] {
+                "Прибыль от основной деятельности",
+                "Всего затрат на реализованную продукцию",
+                "Результат",
+                "Дата"
+        });
     }
 
     public PDFBuilder(String type, Entity[] list) {

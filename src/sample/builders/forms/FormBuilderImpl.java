@@ -1,5 +1,6 @@
 package sample.builders.forms;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,16 +10,18 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 public abstract class FormBuilderImpl implements FormBuilder{
     private VBox box = new VBox();
+    protected ArrayList<TextField> inputs;
 
     @Override
     public VBox createForm() {
         GridPane grid = createGrid();
 
         ArrayList<Label> labels = (ArrayList<Label>) makeLabels();
-        ArrayList<TextField> inputs = (ArrayList<TextField>) makeInputs();
+        inputs = (ArrayList<TextField>) makeInputs();
 
         for (int i = 0; i < labels.size(); i++) {
             Label label = labels.get(i);
@@ -54,6 +57,28 @@ public abstract class FormBuilderImpl implements FormBuilder{
         grid.setVgap(5);
 
         return grid;
+    }
+
+    protected void validate() {
+        for (TextField input : inputs) {
+            String value = input.getText();
+            if (!matcher(value)) {
+                input.getStyleClass().add("invalid");
+            }
+        }
+    }
+
+    protected boolean matcher(String value) {
+        return Pattern.matches("[0-9]+(\\.)?([0-9]+)?", value);
+    }
+
+    protected void addWarningAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Введены неверные данные");
+        alert.setHeaderText("Ошибка чтения данные");
+        alert.setContentText("Данные должные содержать только цифры");
+
+        alert.showAndWait();
     }
 
     protected abstract Collection<Label> makeLabels();

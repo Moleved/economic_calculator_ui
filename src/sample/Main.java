@@ -54,6 +54,7 @@ public class Main extends Application {
         addForm();
 
         Scene scene = new Scene(grid, 800, 360);
+        scene.getStylesheets().add("/home/moleved/Work/Java/ui/src/sample/style.css");
         primaryStage.setScene(scene);
 
         firstLaunch = false;
